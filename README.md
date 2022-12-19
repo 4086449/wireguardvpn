@@ -34,7 +34,7 @@ For Ziggo: http://192.168.178.1/
 
 Go to Advanced Settings -> Security -> Port Forwarding
 
-![ZiggoWelcome](../lib/ZiggoWelcome.png)
+![ZiggoWelcome](./lib/ZiggoWelcome.png)
 
 Press 
 > Create New Rule
@@ -52,7 +52,7 @@ And set to enabled
 
 > Apply Changes
 
-![ZiggoPortForward](../lib/ZiggoPortForward.png)
+![ZiggoPortForward](./lib/ZiggoPortForward.png)
 
 
 ## Deploying Container with portainer

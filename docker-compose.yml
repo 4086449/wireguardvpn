@@ -24,8 +24,8 @@ services:
     volumes:
       - ${FOLDER}/wg-easy:/etc/wireguard
     ports:
-      - 51820:51820/udp
-      - 51821:51821/tcp
+      - ${VPN_PORT}:51820/udp
+      - ${WEB_PORT}:51821/tcp
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -35,4 +35,3 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
     extra_hosts:
       - "host.docker.internal:host-gateway"
-

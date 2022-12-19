@@ -19,7 +19,7 @@ Clients:
 Link a uri to you public ip
 
 Popular dns providers are [duckdns](https://www.duckdns.org/) and [freedns](https://freedns.afraid.org/) 
-They let you link you ip to a domain name of them. eg. https://ozsddnsadres.duckdns.org/
+They let you link you ip to a domain name of them. eg. https://somename.duckdns.org/
 This will let you route traffic back home.
 To find your public IP (you must be on your home network and) simply google ['What is my IP'](https://www.google.nl/search?q=what+is+my+ip)
 
@@ -92,6 +92,14 @@ Probably a faulty indentation when copy/pasting.
 Solutions?
 - Google
 - Call Kano
+
+# Example .env file
+```.env
+FOLDER=/home/pi/wireguardvpn
+HOST_URL=https://somename.duckdns.org
+VPN_PORT=51822
+WEB_PORT=51821
+```
 
 # docker-compose.yml
 ## Deploy with docker-compose

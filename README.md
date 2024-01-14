@@ -14,8 +14,8 @@ Clients:
 
 [Windows Installer](https://download.wireguard.com/windows-client/wireguard-installer.exe)
 
-## Before deployment
-### Dynamic DNS
+# Before deployment
+## Dynamic DNS
 Link a uri to you public ip
 
 Popular dns providers are [duckdns](https://www.duckdns.org/) and [freedns](https://freedns.afraid.org/) 
@@ -27,11 +27,67 @@ _After you have created an account and requested a subdomain,_ Enter the ip you 
 
 __don't forget to update the created subdomain in de docker-compose.yml file__
 
-### Port Forwarding
+## Router
 Go to your router's home page
 
-For Ziggo: [http://192.168.178.1](http://192.168.178.1)
-Normally:  [http://192.168.1.1](http://192.168.1.1)
+### Default Addresses
+
+Common: [http://192.168.1.1](http://192.168.1.1) <br>
+Ziggo: [http://192.168.178.1](http://192.168.178.1)
+
+### Find router address on mac & linux
+
+Open the terminal
+
+> " CMND + ALT + T " on mac
+
+> " CTRL + ALT + T " on linux
+
+Enter the command and hit enter
+
+```bash
+ifconfig
+```
+
+Your active network connection will tell you which IP it has assigned.
+
+The names will probably be simmilar to "wlan0" for wifi and "eth0" for ethernet connection.
+
+The address of the router will be the same 3 starting numbers but the last is "1" for the router
+
+> eg. if your ip is "192.168.1.153", your router will be at "192.168.1.1"
+
+### Find router address on Windows
+
+Press the wifi or network icon on the right in the taskbar.
+
+Press the arrow ">" next to the wifi or network icon.
+
+Press the info icon "ⓘ" next to your active connection
+
+![NetworkProperties](./lib/networkProperties.png)
+
+Scroll down to "IPv4 address". This is the ip address of your PC
+
+![InternalIP](./lib/internalIP.png)
+
+The address of the router will be the same 3 starting numbers but the last is "1" for the router.
+
+eg. if your ip is "192.168.1.153", your router will be at "192.168.1.1"
+
+> My router also does DNS hence my IPv4 DNS servers shows the IP of the router. <br>
+__This is not necessarily your case.__
+
+### Log in
+
+Enter your router's address in any web browser. <br>
+Log in as "admin" user unless specified differently on the device
+
+> Can't remember setting password? The default password is on the back of your router. <br>
+If its not, try the wifi password. <br>
+If that fails, check the brand of your router and google "default password MyRouterBrand". <br> If that didn't work, replace "MyRouterBrand" with the brand of your router...
+
+### Port Forwarding
 
 Go to Advanced Settings -> Security -> Port Forwarding
 
@@ -56,6 +112,23 @@ And set to enabled
 ![ZiggoPortForward](./lib/ZiggoPortForward.png)
 
 
+# Deploy
+
+If you did not clone this repo, first create a folder. 
+> Can be named freely <br>
+> eg. "wireguardvpn"
+
+Copy the path to replace the "FOLDER" environment variable in your ".env" file later. 
+
+Then create an additional folder inside the just created named "wg-easy".
+
+> __MUST__ be named __"wg-easy"__ or don't forget to edit the volume in your docker-compose.yml if you feel like you know what you're doing.
+
+```bash
+$ mkdir ~/wireguardvpn
+$ mkdir ~/wireguardvpn/wg-easy
+```
+
 ## Deploying Container with portainer
 Browse to your pi's IP on port '9000' to go to portainer 'http://<ip_address_pi>:9000'
 
@@ -64,7 +137,7 @@ http://192.168.178.20:9000
 ```
 Press 'local' 
 
-![PortainerHome](../lib/PortainerHome.png)
+![PortainerHome](./lib/PortainerHome.png)
 
 In the taskbar on the left, press:
 
@@ -79,28 +152,18 @@ Copy/paste docker-compose.yml
 
 This could take a minute. A green (or red) notification will appear in the right upper corner of the screen when it is finished.
 
-If it was green, all went well.
+1. If it was green, all went well.
 
 To access the wireguard admin page, go to 'http://<ip_address_pi>:51821'
 ```
 http://192.168.178.20:51821 
 ```
-You're mqtt broker has the same ip as the pi and uses the normal port for mqtt, __1883__
 
-If the notification after deployment was red however, something went wrong. 
-Probably a faulty indentation when copy/pasting.
-
-Solutions?
-- Google
-- Call Kano
-
-# Example .env file
-```.env
-FOLDER=/home/pi/wireguardvpn
-HOST_URL=https://somename.duckdns.org
-VPN_PORT=51822
-WEB_PORT=51821
-```
+2. If the notification after deployment was red however, something went wrong. 
+Probably a faulty indentation when copy/pasting. <br>
+Solutions?<br>
+    - Google
+    - Call G
 
 # docker-compose.yml
 ## Deploy with docker-compose
@@ -152,13 +215,27 @@ services:
       - "host.docker.internal:host-gateway"
 ```
 
+# Environment Variables
+Copy these variables (and edit if necessary) and <br>
+paste them in portainer 
+> press advanced mode or copy/paste them one by one
+
+or in a file called ".env" in the same folder as your docker-compose.ynl.
+## Example .env file
+```.env
+FOLDER=/home/pi/wireguardvpn
+HOST_URL=https://somename.duckdns.org
+VPN_PORT=51822
+WEB_PORT=51821
+```
+
 ## To Change
 ### Mandatory
-- WG_HOST: to your ddns address (see above: Dynamic dns)
+- HOST_URL: to your ddns address (see above: Dynamic dns)
 
 ### Optional
 - ports: you can change the port of the webpage '51821' to an easier to remember number like "12345:51821". Only change the host port ("host_port:container_port"). HOWEVER, __NEVER__ change the wireguard port '51820' unless you feel confident you know what you are doing.
-- volumes: you can change the host folder mapping, tho it should be fine if you follow the README.md's
+- volumes: change the host folder mapping if you did __not__ clone this repo __and__ you chose a different folder name earlier in this file.
 
 # More info
 https://github.com/WeeJeWel/wg-easy/

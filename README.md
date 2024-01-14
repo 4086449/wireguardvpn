@@ -1,5 +1,5 @@
 # Wireguard VPN
-Super easy to use VPN server in a docker container
+Super easy to use VPN server in a docker container. Including a web page easy enough for your mom to understand.
 
 ## Clients
 Full list can be found [here](https://www.wireguard.com/install/): 

@@ -30,7 +30,8 @@ __don't forget to update the created subdomain in de docker-compose.yml file__
 ### Port Forwarding
 Go to your router's home page
 
-For Ziggo: http://192.168.178.1/
+For Ziggo: [http://192.168.178.1](http://192.168.178.1)
+Normally:  [http://192.168.1.1](http://192.168.1.1)
 
 Go to Advanced Settings -> Security -> Port Forwarding
 
@@ -42,7 +43,7 @@ Press
 Add your IP 
 > 192.168.178.20
 
-Enter port "51820" 4 times
+Enter port "51820" 4 times (Sometimes only start and end port, so 2 times)
 
 Choose "UDP" protocol
 
@@ -65,7 +66,7 @@ Press 'local'
 
 ![PortainerHome](../lib/PortainerHome.png)
 
-In the right taskbar, press:
+In the taskbar on the left, press:
 
 > stacks
 

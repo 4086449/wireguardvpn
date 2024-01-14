@@ -39,11 +39,13 @@ Ziggo: [http://192.168.178.1](http://192.168.178.1)
 
 Open the terminal
 
-> " CMND + ALT + T " on mac
+> mac keyboard shortcut <br>
+> " CMND + ALT + T "
 
-> " CTRL + ALT + T " on linux
+> linux keyboard shortcut <br>
+> " CTRL + ALT + T "
 
-Enter the command and hit enter
+Copy/paste command and hit enter
 
 ```bash
 ifconfig
@@ -76,7 +78,7 @@ The address of the router will be the same 3 starting numbers but the last is "1
 eg. if your ip is "192.168.1.153", your router will be at "192.168.1.1"
 
 > My router also does DNS hence my IPv4 DNS servers shows the IP of the router. <br>
-__This is not necessarily your case.__
+> __This is not necessarily your case.__
 
 ### Log in
 
@@ -84,8 +86,9 @@ Enter your router's address in any web browser. <br>
 Log in as "admin" user unless specified differently on the device
 
 > Can't remember setting password? The default password is on the back of your router. <br>
-If its not, try the wifi password. <br>
-If that fails, check the brand of your router and google "default password MyRouterBrand". <br> If that didn't work, replace "MyRouterBrand" with the brand of your router...
+> If its not, try the wifi password. <br>
+> If that fails, check the brand of your router and google "default password MyRouterBrand". <br> 
+> If that didn't work, replace "MyRouterBrand" with the brand of your router...
 
 ### Port Forwarding
 
@@ -105,9 +108,7 @@ Choose "UDP" protocol
 
 And set to enabled 
 
-> Add Rule
-
-> Apply Changes
+_Add Rule -> Apply Changes_
 
 ![ZiggoPortForward](./lib/ZiggoPortForward.png)
 
@@ -147,33 +148,45 @@ In the taskbar on the left, press:
 
 Enter name 'wireguardvpn' _(no capitols or characters)_
 
-Copy/paste docker-compose.yml
-> deploy stack
+Copy/paste docker-compose.yml into the editor field
+
+Fill in environment variables. If you didn't clone this repo, edit the variables to your local setup
+
+press "_deploy stack_"
 
 This could take a minute. A green (or red) notification will appear in the right upper corner of the screen when it is finished.
 
 1. If it was green, all went well.
 
-To access the wireguard admin page, go to 'http://<ip_address_pi>:51821'
-```
-http://192.168.178.20:51821 
-```
+    - To access the wireguard admin page, go to 'http://<ip_address_pi>:51821' 
+    > e.g. [http://192.168.178.20:51821](http://192.168.178.20:51821)
+
 
 2. If the notification after deployment was red however, something went wrong. 
-Probably a faulty indentation when copy/pasting. <br>
-Solutions?<br>
+Probably a faulty indentation when copy/pasting.
+
+    Solutions?
     - Google
     - Call G
 
 # docker-compose.yml
+The file that tells docker-compose what to do
+
 ## Deploy with docker-compose
+Open a terminal or similar CLI
+> If you don't have docker-compose installed, ask google. If you're on a raspberry pi, check my [docker-install repo](https://github.com/4086449/docker-install)
+
 ### To start / stop
-__Always__ go the the folder that contains your 'docker-compose.yml' file. __NEVER__ change the name 'docker-compose.yml'
+__ALWAYS__ make sure you are in the same folder that contains your 'docker-compose.yml' file. <br>
+__NEVER__ change the name 'docker-compose.yml'
+
 ```
 docker-compose up -d
 docker-compose down
 ```
 > -d for detached. Curious? Try without (stop -> ctrl + c) 
+
+### docker-compose.yml
 
 ```
 version: "3.8"
@@ -218,9 +231,10 @@ services:
 # Environment Variables
 Copy these variables (and edit if necessary) and <br>
 paste them in portainer 
-> press advanced mode or copy/paste them one by one
+> scroll down below the field of the docker-compose.yml <br>
+> press advanced mode or copy/paste the variables one by one
 
-or in a file called ".env" in the same folder as your docker-compose.ynl.
+>or create a file called ".env" in the same folder as your docker-compose.ynl.
 ## Example .env file
 ```.env
 FOLDER=/home/pi/wireguardvpn

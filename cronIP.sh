@@ -1,3 +1,10 @@
+/*
+Usage:    ./cronIP.sh --location myPlace --endpoint https://my.webhookrelay.com/v1/webhooks/abcToken-1234
+*/
+
+
+
+
 #!/bin/bash
 
 pararser() {
